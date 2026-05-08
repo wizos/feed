@@ -1,52 +1,7 @@
-mixed-port: 7890
-allow-lan: false
-mode: "rule"
-log-level: "info"
-external-controller: "127.0.0.1:9999"
-dns:
-  enable: true
-  listen: "0.0.0.0:53"
-  ipv6: false
-  default-nameserver:
-  - "223.5.5.5"
-  - "114.114.114.114"
-  nameserver:
-  - "223.5.5.5"
-  - "114.114.114.114"
-  - "119.29.29.29"
-  - "180.76.76.76"
-  enhanced-mode: "fake-ip"
-  fake-ip-range: "198.18.0.1/16"
-  fake-ip-filter:
-  - "*.lan"
-  - "*.localdomain"
-  - "*.example"
-  - "*.invalid"
-  - "*.localhost"
-  - "*.test"
-  - "*.local"
-  - "*.home.arpa"
-  - "router.asus.com"
-  - "localhost.sec.qq.com"
-  - "localhost.ptlogin2.qq.com"
-  - "+.msftconnecttest.com"
-tun:
-  enable: true
-  auto-route: true
-  auto-detect-interface: true
-  dns-hijack:
-  - "114.114.114.114"
-  - "180.76.76.76"
-  - "119.29.29.29"
-  - "223.5.5.5"
-  - "8.8.8.8"
-  - "8.8.4.4"
-  - "1.1.1.1"
-  - "1.0.0.1"
 proxies:
   - name: Office-Checkin
     type: vless
-    server: coral-gates-henry-peterson.trycloudflare.com
+    server: cf-tunnel.chuci.xyz
     port: 443
     uuid: b71e108d-be48-4971-a55e-0ddc4c49081b
     tls: true
@@ -56,13 +11,15 @@ proxies:
     ws-opts:
       path: /vless-ws
       headers:
-        Host: coral-gates-henry-peterson.trycloudflare.com
+        Host: cf-tunnel.chuci.xyz
 
 proxy-groups:
   - name: Proxy
     type: select
     proxies:
       - Office-Checkin
+      - DIRECT
 
 rules:
+  - GEOIP,CN,DIRECT
   - MATCH,Proxy
