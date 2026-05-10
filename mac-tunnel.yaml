@@ -3,7 +3,7 @@ proxies:
     type: vless
     server: cf-tunnel.chuci.xyz
     port: 443
-    uuid: b71e108d-be48-4971-a55e-0ddc4c49081b
+    uuid: 0fc8557a-598b-43fe-a3db-c4fa949692ed
     tls: true
     udp: true
     client-fingerprint: chrome
@@ -18,8 +18,6 @@ proxy-groups:
     type: select
     proxies:
       - Office-Checkin
-      - DIRECT
 
 rules:
-  - GEOIP,CN,DIRECT
   - MATCH,Proxy
